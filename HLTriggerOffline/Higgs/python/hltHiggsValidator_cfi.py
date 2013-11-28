@@ -110,6 +110,7 @@ hltHiggsValidator = cms.EDAnalyzer("HLTHiggsValidator",
 	    hltPathsToCheck = cms.vstring(
 		    "HLT_Photon26_R9Id85_OR_CaloId10_Iso50_Photon18_R9Id85_OR_CaloId10_Iso50_Mass70_v",
 		    "HLT_Photon36_R9Id85_OR_CaloId10_Iso50_Photon22_R9Id85_OR_CaloId10_Iso50_v",
+		    "HLT_Photon36_R9Id85_OR_CaloId10_Iso50_Photon10_R9Id85_OR_CaloId10_Iso50_Mass80_v",
 		    ),
 	    recPhotonLabel  = cms.string("photons"),
 	    # -- Analysis specific cuts
