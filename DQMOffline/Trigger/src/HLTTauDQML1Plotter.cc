@@ -46,7 +46,7 @@ HLTTauDQML1Plotter::HLTTauDQML1Plotter(const edm::ParameterSet& ps,
   configValid_ = true;
 }
 
-void HLTTauDQML1Plotter::bookHistograms(DQMStore::IBooker& iBooker) {
+void HLTTauDQML1Plotter::bookHistograms(DQMStore::IBooker& iBooker, PlotLevel* pl) {
   if (!configValid_)
     return;
 
@@ -62,98 +62,97 @@ void HLTTauDQML1Plotter::bookHistograms(DQMStore::IBooker& iBooker) {
   //Create the histograms
   iBooker.setCurrentFolder(triggerTag());
 
-  l1tauEt_ = iBooker.book1D("L1TauEt", "L1 #tau E_{T};L1 #tau E_{T};entries", binsEt_, 0, maxPt_);
-  l1tauEta_ = iBooker.book1D("L1TauEta", "L1 #tau #eta;L1 #tau #eta;entries", binsEta_, -maxEta_, maxEta_);
-  l1tauPhi_ = iBooker.book1D("L1TauPhi", "L1 #tau #phi;L1 #tau #phi;entries", binsPhi_, minPhi, maxPhi);
+  l1tauEt_ = pl->book(iBooker.book1D("L1TauEt", "L1 #tau E_{T};L1 #tau E_{T};entries", binsEt_, 0, maxPt_),kEverything);
+  l1tauEta_ = pl->book(iBooker.book1D("L1TauEta", "L1 #tau #eta;L1 #tau #eta;entries", binsEta_, -maxEta_, maxEta_),kEverything);
+  l1tauPhi_ = pl->book(iBooker.book1D("L1TauPhi", "L1 #tau #phi;L1 #tau #phi;entries", binsPhi_, minPhi, maxPhi),kEverything);
 
-  l1isotauEt_ = iBooker.book1D("L1IsoTauEt", "L1 isolated #tau E_{T};L1 #tau E_{T};entries", binsEt_, 0, maxPt_);
+  l1isotauEt_ = pl->book(iBooker.book1D("L1IsoTauEt", "L1 isolated #tau E_{T};L1 #tau E_{T};entries", binsEt_, 0, maxPt_),kEverything);
   l1isotauEta_ =
-      iBooker.book1D("L1IsoTauEta", "L1 isolated #tau #eta;L1 #tau #eta;entries", binsEta_, -maxEta_, maxEta_);
-  l1isotauPhi_ = iBooker.book1D("L1IsoTauPhi", "L1 isolated #tau #phi;L1 #tau #phi;entries", binsPhi_, minPhi, maxPhi);
+    pl->book(iBooker.book1D("L1IsoTauEta", "L1 isolated #tau #eta;L1 #tau #eta;entries", binsEta_, -maxEta_, maxEta_),kEverything);
+  l1isotauPhi_ = pl->book(iBooker.book1D("L1IsoTauPhi", "L1 isolated #tau #phi;L1 #tau #phi;entries", binsPhi_, minPhi, maxPhi),kEverything);
 
-  l1etmEt_ = iBooker.book1D("L1ETM", "L1 ETM E_{T};L1 ETM E_{T};entries", binsEt_, 0, maxPt_);
-  l1etmPhi_ = iBooker.book1D("L1ETMPhi", "L1 ETM #phi;L1 ETM #phi;entries", binsPhi_, minPhi, maxPhi);
+  l1etmEt_ = pl->book(iBooker.book1D("L1ETM", "L1 ETM E_{T};L1 ETM E_{T};entries", binsEt_, 0, maxPt_),kEverything);
+  l1etmPhi_ = pl->book(iBooker.book1D("L1ETMPhi", "L1 ETM #phi;L1 ETM #phi;entries", binsPhi_, minPhi, maxPhi),kEverything);
 
   snprintf(buffer, BUFMAX, "L1 leading #tau E_{T};L1 #tau E_{T};entries");
-  firstTauEt_ = iBooker.book1D("L1LeadTauEt", buffer, binsEt_, 0, maxPt_);
+  firstTauEt_ = pl->book(iBooker.book1D("L1LeadTauEt", buffer, binsEt_, 0, maxPt_),kEverything);
   snprintf(buffer, BUFMAX, "L1 leading #tau #eta;L1 #tau #eta;entries");
-  firstTauEta_ = iBooker.book1D("L1LeadTauEta", buffer, binsEta_, -maxEta_, maxEta_);
+  firstTauEta_ = pl->book(iBooker.book1D("L1LeadTauEta", buffer, binsEta_, -maxEta_, maxEta_),kEverything);
   snprintf(buffer, BUFMAX, "L1 leading #tau #phi;L1 #tau #phi;entries");
-  firstTauPhi_ = iBooker.book1D("L1LeadTauPhi", buffer, binsPhi_, minPhi, maxPhi);
+  firstTauPhi_ = pl->book(iBooker.book1D("L1LeadTauPhi", buffer, binsPhi_, minPhi, maxPhi),kEverything);
 
   snprintf(buffer, BUFMAX, "L1 second-leading #tau E_{T};L1 #tau E_{T};entries");
-  secondTauEt_ = iBooker.book1D("L1SecondTauEt", buffer, binsEt_, 0, maxPt_);
+  secondTauEt_ = pl->book(iBooker.book1D("L1SecondTauEt", buffer, binsEt_, 0, maxPt_),kEverything);
   snprintf(buffer, BUFMAX, "L1 second-leading #tau #eta;L1 #tau #eta;entries");
-  secondTauEta_ = iBooker.book1D("L1SecondTauEta", buffer, binsEta_, -maxEta_, maxEta_);
+  secondTauEta_ = pl->book(iBooker.book1D("L1SecondTauEta", buffer, binsEta_, -maxEta_, maxEta_),kEverything);
   snprintf(buffer, BUFMAX, "L1 second-leading #tau #phi;L1 #tau #phi;entries");
-  secondTauPhi_ = iBooker.book1D("L1SecondTauPhi", buffer, binsPhi_, minPhi, maxPhi);
+  secondTauPhi_ = pl->book(iBooker.book1D("L1SecondTauPhi", buffer, binsPhi_, minPhi, maxPhi),kEverything);
 
   snprintf(buffer, BUFMAX, "L1 leading isolated #tau E_{T};L1 #tau E_{T};entries");
-  firstIsoTauEt_ = iBooker.book1D("L1LeadIsoTauEt", buffer, binsEt_, 0, maxPt_);
+  firstIsoTauEt_ = pl->book(iBooker.book1D("L1LeadIsoTauEt", buffer, binsEt_, 0, maxPt_),kEverything);
   snprintf(buffer, BUFMAX, "L1 leading isolated #tau #eta;L1 #tau #eta;entries");
-  firstIsoTauEta_ = iBooker.book1D("L1LeadIsoTauEta", buffer, binsEta_, -maxEta_, maxEta_);
+  firstIsoTauEta_ = pl->book(iBooker.book1D("L1LeadIsoTauEta", buffer, binsEta_, -maxEta_, maxEta_),kEverything);
   snprintf(buffer, BUFMAX, "L1 leading isolated #tau #phi;L1 #tau #phi;entries");
-  firstIsoTauPhi_ = iBooker.book1D("L1LeadIsoTauPhi", buffer, binsPhi_, minPhi, maxPhi);
+  firstIsoTauPhi_ = pl->book(iBooker.book1D("L1LeadIsoTauPhi", buffer, binsPhi_, minPhi, maxPhi),kEverything);
 
   snprintf(buffer, BUFMAX, "L1 second-leading isolated #tau E_{T};L1 #tau E_{T};entries");
-  secondIsoTauEt_ = iBooker.book1D("L1SecondIsoTauEt", buffer, binsEt_, 0, maxPt_);
+  secondIsoTauEt_ = pl->book(iBooker.book1D("L1SecondIsoTauEt", buffer, binsEt_, 0, maxPt_),kEverything);
   snprintf(buffer, BUFMAX, "L1 second-leading isolated #tau #eta;L1 #tau #eta;entries");
-  secondIsoTauEta_ = iBooker.book1D("L1SecondIsoTauEta", buffer, binsEta_, -maxEta_, maxEta_);
+  secondIsoTauEta_ = pl->book(iBooker.book1D("L1SecondIsoTauEta", buffer, binsEta_, -maxEta_, maxEta_),kEverything);
   snprintf(buffer, BUFMAX, "L1 second-leading isolated #tau #phi;L1 #tau #phi;entries");
-  secondIsoTauPhi_ = iBooker.book1D("L1SecondIsoTauPhi", buffer, binsPhi_, minPhi, maxPhi);
+  secondIsoTauPhi_ = pl->book(iBooker.book1D("L1SecondIsoTauPhi", buffer, binsPhi_, minPhi, maxPhi),kEverything);
 
   if (doRefAnalysis_) {
-    l1tauEtRes_ = iBooker.book1D(
-        "L1TauEtResol", "L1 #tau E_{T} resolution;[L1 #tau E_{T}-Ref #tau E_{T}]/Ref #tau E_{T};entries", 60, -1, 4);
-    l1isotauEtRes_ =
-        iBooker.book1D("L1IsoTauEtResol",
+    l1tauEtRes_ = pl->book(iBooker.book1D(
+        "L1TauEtResol", "L1 #tau E_{T} resolution;[L1 #tau E_{T}-Ref #tau E_{T}]/Ref #tau E_{T};entries", 60, -1, 4),kEverything);
+    l1isotauEtRes_ = pl->book(iBooker.book1D("L1IsoTauEtResol",
                        "L1 isolated #tau E_{T} resolution;[L1 #tau E_{T}-Ref #tau E_{T}]/Ref #tau E_{T};entries",
                        60,
                        -1,
-                       4);
+                       4),kEverything);
 
     iBooker.setCurrentFolder(triggerTag() + "/helpers");
 
     l1tauEtEffNum_ =
-        iBooker.book1D("L1TauEtEffNum", "L1 #tau E_{T} Efficiency;Ref #tau E_{T};entries", binsEt_, 0, maxPt_);
-    l1tauHighEtEffNum_ = iBooker.book1D(
-        "L1TauHighEtEffNum", "L1 #tau E_{T} Efficiency (high E_{T});Ref #tau E_{T};entries", binsEt_, 0, maxHighPt_);
+      pl->book(iBooker.book1D("L1TauEtEffNum", "L1 #tau E_{T} Efficiency;Ref #tau E_{T};entries", binsEt_, 0, maxPt_),kEverything);
+    l1tauHighEtEffNum_ = pl->book(iBooker.book1D(
+		 "L1TauHighEtEffNum", "L1 #tau E_{T} Efficiency (high E_{T});Ref #tau E_{T};entries", binsEt_, 0, maxHighPt_),kEverything);
 
     l1tauEtEffDenom_ =
-        iBooker.book1D("L1TauEtEffDenom", "L1 #tau E_{T} Denominator;Ref #tau E_{T};entries", binsEt_, 0, maxPt_);
-    l1tauHighEtEffDenom_ = iBooker.book1D("L1TauHighEtEffDenom",
+      pl->book(iBooker.book1D("L1TauEtEffDenom", "L1 #tau E_{T} Denominator;Ref #tau E_{T};entries", binsEt_, 0, maxPt_),kEverything);
+    l1tauHighEtEffDenom_ = pl->book(iBooker.book1D("L1TauHighEtEffDenom",
                                           "L1 #tau E_{T} Denominator (high E_{T});Ref #tau E_{T};Efficiency",
                                           binsEt_,
                                           0,
-                                          maxHighPt_);
+					  maxHighPt_),kEverything);
 
     l1tauEtaEffNum_ =
-        iBooker.book1D("L1TauEtaEffNum", "L1 #tau #eta Efficiency;Ref #tau #eta;entries", binsEta_, -maxEta_, maxEta_);
-    l1tauEtaEffDenom_ = iBooker.book1D(
-        "L1TauEtaEffDenom", "L1 #tau #eta Denominator;Ref #tau #eta;entries", binsEta_, -maxEta_, maxEta_);
+      pl->book(iBooker.book1D("L1TauEtaEffNum", "L1 #tau #eta Efficiency;Ref #tau #eta;entries", binsEta_, -maxEta_, maxEta_),kEverything);
+    l1tauEtaEffDenom_ = pl->book(iBooker.book1D(
+	"L1TauEtaEffDenom", "L1 #tau #eta Denominator;Ref #tau #eta;entries", binsEta_, -maxEta_, maxEta_),kEverything);
 
     l1tauPhiEffNum_ =
-        iBooker.book1D("L1TauPhiEffNum", "L1 #tau #phi Efficiency;Ref #tau #phi;entries", binsPhi_, minPhi, maxPhi);
-    l1tauPhiEffDenom_ = iBooker.book1D(
-        "L1TauPhiEffDenom", "L1 #tau #phi Denominator;Ref #tau #phi;Efficiency", binsPhi_, minPhi, maxPhi);
+      pl->book(iBooker.book1D("L1TauPhiEffNum", "L1 #tau #phi Efficiency;Ref #tau #phi;entries", binsPhi_, minPhi, maxPhi),kEverything);
+    l1tauPhiEffDenom_ = pl->book(iBooker.book1D(
+	"L1TauPhiEffDenom", "L1 #tau #phi Denominator;Ref #tau #phi;Efficiency", binsPhi_, minPhi, maxPhi),kEverything);
 
-    l1isotauEtEffNum_ = iBooker.book1D(
-        "L1IsoTauEtEffNum", "L1 isolated #tau E_{T} Efficiency;Ref #tau E_{T};entries", binsEt_, 0, maxPt_);
-    l1isotauEtEffDenom_ = iBooker.book1D(
-        "L1IsoTauEtEffDenom", "L1 isolated #tau E_{T} Denominator;Ref #tau E_{T};entries", binsEt_, 0, maxPt_);
+    l1isotauEtEffNum_ = pl->book(iBooker.book1D(
+	"L1IsoTauEtEffNum", "L1 isolated #tau E_{T} Efficiency;Ref #tau E_{T};entries", binsEt_, 0, maxPt_),kEverything);
+    l1isotauEtEffDenom_ = pl->book(iBooker.book1D(
+        "L1IsoTauEtEffDenom", "L1 isolated #tau E_{T} Denominator;Ref #tau E_{T};entries", binsEt_, 0, maxPt_),kEverything);
 
-    l1isotauEtaEffNum_ = iBooker.book1D(
-        "L1IsoTauEtaEffNum", "L1 isolated #tau #eta Efficiency;Ref #tau #eta;entries", binsEta_, -maxEta_, maxEta_);
-    l1isotauEtaEffDenom_ = iBooker.book1D(
-        "L1IsoTauEtaEffDenom", "L1 isolated #tau #eta Denominator;Ref #tau #eta;entries", binsEta_, -maxEta_, maxEta_);
+    l1isotauEtaEffNum_ = pl->book(iBooker.book1D(
+        "L1IsoTauEtaEffNum", "L1 isolated #tau #eta Efficiency;Ref #tau #eta;entries", binsEta_, -maxEta_, maxEta_),kEverything);
+    l1isotauEtaEffDenom_ = pl->book(iBooker.book1D(
+        "L1IsoTauEtaEffDenom", "L1 isolated #tau #eta Denominator;Ref #tau #eta;entries", binsEta_, -maxEta_, maxEta_),kEverything);
 
-    l1isotauPhiEffNum_ = iBooker.book1D(
-        "L1IsoTauPhiEffNum", "L1 isolated #tau #phi Efficiency;Ref #tau #phi;entries", binsPhi_, minPhi, maxPhi);
-    l1isotauPhiEffDenom_ = iBooker.book1D(
-        "L1IsoTauPhiEffDenom", "L1 isolated #tau #phi Denominator;Ref #tau #phi;Efficiency", binsPhi_, minPhi, maxPhi);
+    l1isotauPhiEffNum_ = pl->book(iBooker.book1D(
+        "L1IsoTauPhiEffNum", "L1 isolated #tau #phi Efficiency;Ref #tau #phi;entries", binsPhi_, minPhi, maxPhi),kEverything);
+    l1isotauPhiEffDenom_ = pl->book(iBooker.book1D(
+        "L1IsoTauPhiEffDenom", "L1 isolated #tau #phi Denominator;Ref #tau #phi;Efficiency", binsPhi_, minPhi, maxPhi),kEverything);
 
-    l1etmEtEffNum_ = iBooker.book1D("L1ETMEtEffNum", "L1 ETM Efficiency;Ref MET;entries", binsEt_, 0, maxPt_);
-    l1etmEtEffDenom_ = iBooker.book1D("L1ETMEtEffDenom", "L1 ETM Denominator;Ref MET;entries", binsEt_, 0, maxPt_);
+    l1etmEtEffNum_ = pl->book(iBooker.book1D("L1ETMEtEffNum", "L1 ETM Efficiency;Ref MET;entries", binsEt_, 0, maxPt_),kEverything);
+    l1etmEtEffDenom_ = pl->book(iBooker.book1D("L1ETMEtEffDenom", "L1 ETM Denominator;Ref MET;entries", binsEt_, 0, maxPt_),kEverything);
   }
 }
 
@@ -169,19 +168,19 @@ void HLTTauDQML1Plotter::analyze(const edm::Event& iEvent,
   if (doRefAnalysis_) {
     //Tau reference
     for (auto const& tau : refC.taus) {
-      l1tauEtEffDenom_->Fill(tau.pt());
-      l1tauHighEtEffDenom_->Fill(tau.pt());
+      if(l1tauEtEffDenom_) l1tauEtEffDenom_->Fill(tau.pt());
+      if(l1tauHighEtEffDenom_) l1tauHighEtEffDenom_->Fill(tau.pt());
 
-      l1tauEtaEffDenom_->Fill(tau.eta());
+      if(l1tauEtaEffDenom_) l1tauEtaEffDenom_->Fill(tau.eta());
 
-      l1tauPhiEffDenom_->Fill(tau.phi());
+      if(l1tauPhiEffDenom_) l1tauPhiEffDenom_->Fill(tau.phi());
 
-      l1isotauEtEffDenom_->Fill(tau.pt());
-      l1isotauEtaEffDenom_->Fill(tau.eta());
-      l1isotauPhiEffDenom_->Fill(tau.phi());
+      if(l1isotauEtEffDenom_) l1isotauEtEffDenom_->Fill(tau.pt());
+      if(l1isotauEtaEffDenom_) l1isotauEtaEffDenom_->Fill(tau.eta());
+      if(l1isotauPhiEffDenom_) l1isotauPhiEffDenom_->Fill(tau.phi());
     }
     if (!refC.met.empty())
-      l1etmEtEffDenom_->Fill(refC.met[0].pt());
+      if(l1etmEtEffDenom_) l1etmEtEffDenom_->Fill(refC.met[0].pt());
   }
 
   //Analyze L1 Objects (Tau+Jets)
@@ -205,14 +204,14 @@ void HLTTauDQML1Plotter::analyze(const edm::Event& iEvent,
       if (i.hwIso() > 0)
         l1isotaus.push_back(i.p4());
       if (!doRefAnalysis_) {
-        l1tauEt_->Fill(i.et());
-        l1tauEta_->Fill(i.eta());
-        l1tauPhi_->Fill(i.phi());
+        if(l1tauEt_) l1tauEt_->Fill(i.et());
+        if(l1tauEta_) l1tauEta_->Fill(i.eta());
+        if(l1tauPhi_) l1tauPhi_->Fill(i.phi());
         pathTaus.push_back(i.p4());
 
-        l1isotauEt_->Fill(i.et());
-        l1isotauEta_->Fill(i.eta());
-        l1isotauPhi_->Fill(i.phi());
+        if(l1isotauEt_) l1isotauEt_->Fill(i.et());
+        if(l1isotauEta_) l1isotauEta_->Fill(i.eta());
+        if(l1isotauPhi_) l1isotauPhi_->Fill(i.phi());
         if (i.hwIso() > 0)
           pathIsoTaus.push_back(i.p4());
       }
@@ -227,8 +226,9 @@ void HLTTauDQML1Plotter::analyze(const edm::Event& iEvent,
       for (int ibx = sums->getFirstBX(); ibx <= sums->getLastBX(); ++ibx) {
         for (auto it = sums->begin(ibx); it != sums->end(ibx); it++) {
           auto type = static_cast<int>(it->getType());
-          if (type == l1t::EtSum::EtSumType::kMissingEt)
-            l1etmEt_->Fill(it->et());
+          if (type == l1t::EtSum::EtSumType::kMissingEt){
+            if(l1etmEt_) l1etmEt_->Fill(it->et());
+	  }
         }
       }
     }
@@ -242,30 +242,30 @@ void HLTTauDQML1Plotter::analyze(const edm::Event& iEvent,
     for (auto const& tau : refC.taus) {
       std::pair<bool, LV> m = match(tau, l1taus, matchDeltaR_);
       if (m.first) {
-        l1tauEt_->Fill(m.second.pt());
-        l1tauEta_->Fill(m.second.eta());
-        l1tauPhi_->Fill(m.second.phi());
+        if(l1tauEt_) l1tauEt_->Fill(m.second.pt());
+        if(l1tauEta_) l1tauEta_->Fill(m.second.eta());
+        if(l1tauPhi_) l1tauPhi_->Fill(m.second.phi());
 
-        l1tauEtEffNum_->Fill(tau.pt());
-        l1tauHighEtEffNum_->Fill(tau.pt());
-        l1tauEtaEffNum_->Fill(tau.eta());
-        l1tauPhiEffNum_->Fill(tau.phi());
+        if(l1tauEtEffNum_) l1tauEtEffNum_->Fill(tau.pt());
+        if(l1tauHighEtEffNum_) l1tauHighEtEffNum_->Fill(tau.pt());
+        if(l1tauEtaEffNum_) l1tauEtaEffNum_->Fill(tau.eta());
+        if(l1tauPhiEffNum_) l1tauPhiEffNum_->Fill(tau.phi());
 
-        l1tauEtRes_->Fill((m.second.pt() - tau.pt()) / tau.pt());
+        if(l1tauEtRes_) l1tauEtRes_->Fill((m.second.pt() - tau.pt()) / tau.pt());
 
         pathTaus.push_back(m.second);
       }
       m = match(tau, l1isotaus, matchDeltaR_);
       if (m.first) {
-        l1isotauEt_->Fill(m.second.pt());
-        l1isotauEta_->Fill(m.second.eta());
-        l1isotauPhi_->Fill(m.second.phi());
+        if(l1isotauEt_) l1isotauEt_->Fill(m.second.pt());
+        if(l1isotauEta_) l1isotauEta_->Fill(m.second.eta());
+        if(l1isotauPhi_) l1isotauPhi_->Fill(m.second.phi());
 
-        l1isotauEtEffNum_->Fill(tau.pt());
-        l1isotauEtaEffNum_->Fill(tau.eta());
-        l1isotauPhiEffNum_->Fill(tau.phi());
+        if(l1isotauEtEffNum_) l1isotauEtEffNum_->Fill(tau.pt());
+        if(l1isotauEtaEffNum_) l1isotauEtaEffNum_->Fill(tau.eta());
+        if(l1isotauPhiEffNum_) l1isotauPhiEffNum_->Fill(tau.phi());
 
-        l1isotauEtRes_->Fill((m.second.pt() - tau.pt()) / tau.pt());
+        if(l1isotauEtRes_) l1isotauEtRes_->Fill((m.second.pt() - tau.pt()) / tau.pt());
 
         pathIsoTaus.push_back(m.second);
       }
@@ -276,11 +276,11 @@ void HLTTauDQML1Plotter::analyze(const edm::Event& iEvent,
         for (auto it = sums->begin(ibx); it != sums->end(ibx); it++) {
           auto type = static_cast<int>(it->getType());
           if (type == l1t::EtSum::EtSumType::kMissingEt) {
-            l1etmEt_->Fill(it->et());
-            l1etmPhi_->Fill(it->phi());
+            if(l1etmEt_) l1etmEt_->Fill(it->et());
+            if(l1etmPhi_) l1etmPhi_->Fill(it->phi());
 
             if (it->et() > l1ETMMin_) {
-              l1etmEtEffNum_->Fill(it->et());
+              if(l1etmEtEffNum_) l1etmEtEffNum_->Fill(it->et());
             }
           }
         }
@@ -292,25 +292,25 @@ void HLTTauDQML1Plotter::analyze(const edm::Event& iEvent,
   if (pathTaus.size() > 1)
     std::sort(pathTaus.begin(), pathTaus.end(), [](const LV& a, const LV& b) { return a.pt() > b.pt(); });
   if (!pathTaus.empty()) {
-    firstTauEt_->Fill(pathTaus[0].pt());
-    firstTauEta_->Fill(pathTaus[0].eta());
-    firstTauPhi_->Fill(pathTaus[0].phi());
+    if(firstTauEt_) firstTauEt_->Fill(pathTaus[0].pt());
+    if(firstTauEta_) firstTauEta_->Fill(pathTaus[0].eta());
+    if(firstTauPhi_) firstTauPhi_->Fill(pathTaus[0].phi());
   }
   if (pathTaus.size() > 1) {
-    secondTauEt_->Fill(pathTaus[1].pt());
-    secondTauEta_->Fill(pathTaus[1].eta());
-    secondTauPhi_->Fill(pathTaus[1].phi());
+    if(secondTauEt_) secondTauEt_->Fill(pathTaus[1].pt());
+    if(secondTauEta_) secondTauEta_->Fill(pathTaus[1].eta());
+    if(secondTauPhi_) secondTauPhi_->Fill(pathTaus[1].phi());
   }
   if (pathIsoTaus.size() > 1)
     std::sort(pathIsoTaus.begin(), pathIsoTaus.end(), [](const LV& a, const LV& b) { return a.pt() > b.pt(); });
   if (!pathIsoTaus.empty()) {
-    firstIsoTauEt_->Fill(pathIsoTaus[0].pt());
-    firstIsoTauEta_->Fill(pathIsoTaus[0].eta());
-    firstIsoTauPhi_->Fill(pathIsoTaus[0].phi());
+    if(firstIsoTauEt_) firstIsoTauEt_->Fill(pathIsoTaus[0].pt());
+    if(firstIsoTauEta_) firstIsoTauEta_->Fill(pathIsoTaus[0].eta());
+    if(firstIsoTauPhi_) firstIsoTauPhi_->Fill(pathIsoTaus[0].phi());
   }
   if (pathIsoTaus.size() > 1) {
-    secondIsoTauEt_->Fill(pathIsoTaus[1].pt());
-    secondIsoTauEta_->Fill(pathIsoTaus[1].eta());
-    secondIsoTauPhi_->Fill(pathIsoTaus[1].phi());
+    if(secondIsoTauEt_) secondIsoTauEt_->Fill(pathIsoTaus[1].pt());
+    if(secondIsoTauEta_) secondIsoTauEta_->Fill(pathIsoTaus[1].eta());
+    if(secondIsoTauPhi_) secondIsoTauPhi_->Fill(pathIsoTaus[1].phi());
   }
 }

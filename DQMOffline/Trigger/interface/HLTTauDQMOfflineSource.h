@@ -17,6 +17,7 @@
 #include "DQMOffline/Trigger/interface/HLTTauDQMPathPlotter.h"
 #include "DQMOffline/Trigger/interface/HLTTauDQMPathSummaryPlotter.h"
 #include "DQMOffline/Trigger/interface/HLTTauDQMTagAndProbePlotter.h"
+#include "DQMOffline/Trigger/interface/PlotLevel.h"
 
 #include "CommonTools/TriggerUtils/interface/GenericTriggerEventFlag.h"
 
@@ -29,7 +30,8 @@
 class HLTTauDQMOfflineSource : public DQMEDAnalyzer {
 public:
   HLTTauDQMOfflineSource(const edm::ParameterSet&);
-  ~HLTTauDQMOfflineSource() override;
+  //  ~HLTTauDQMOfflineSource() override;
+  ~HLTTauDQMOfflineSource();
 
 protected:
   void dqmBeginRun(const edm::Run& r, const edm::EventSetup& c) override;
@@ -48,6 +50,8 @@ private:
   const int nPtBins_, nEtaBins_, nPhiBins_;
   const double ptMax_, highPtMax_, l1MatchDr_, hltMatchDr_;
   const std::string dqmBaseFolder_;
+
+  PlotLevel *plotLevel;
 
   HLTConfigProvider HLTCP_;
 

@@ -25,7 +25,7 @@ public:
 
   using HLTTauDQMPlotter::isValid;
 
-  void bookHistograms(DQMStore::IBooker& iBooker);
+  void bookHistograms(DQMStore::IBooker& iBooker, PlotLevel*);
   void analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup, const HLTTauDQMOfflineObjects& refC);
 
 private:

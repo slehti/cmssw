@@ -12,6 +12,8 @@
 //Include DQM core
 #include "DQMServices/Core/interface/DQMStore.h"
 
+#include "DQMOffline/Trigger/interface/PlotLevel.h"
+
 using LV = math::XYZTLorentzVectorD;
 using LVColl = std::vector<LV>;
 
