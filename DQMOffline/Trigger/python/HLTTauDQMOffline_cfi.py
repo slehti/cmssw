@@ -79,7 +79,7 @@ from DQMServices.Core.DQMEDAnalyzer import DQMEDAnalyzer
 hltTauOfflineMonitor_PFTaus = DQMEDAnalyzer('HLTTauDQMOfflineSource',
     HLTProcessName = cms.untracked.string(hltTauDQMofflineProcess),
     DQMBaseFolder = cms.untracked.string("HLT/TAU/PFTaus"),
-    PlotLevel = cms.untracked.int32(kEverything),
+    PlotLevel = cms.untracked.int32(kVital),
     TriggerResultsSrc = cms.untracked.InputTag("TriggerResults", "", hltTauDQMofflineProcess),
     TriggerEventSrc = cms.untracked.InputTag("hltTriggerSummaryAOD", "", hltTauDQMofflineProcess),
     L1Plotter = cms.untracked.PSet(

@@ -54,8 +54,8 @@ void HLTTauDQMTagAndProbePlotter::bookHistograms(IWrapper& iWrapper, DQMStore::I
 
   // Efficiency helpers
   iBooker.setCurrentFolder(triggerTag() + "/helpers");
-  h_num_pt = iWrapper.book1D(iBooker,xvariable + "EtEffNum", "", nbinsPt_, ptmin_, ptmax_);
-  h_den_pt = iWrapper.book1D(iBooker,xvariable + "EtEffDenom", "", nbinsPt_, ptmin_, ptmax_);
+  h_num_pt = iWrapper.book1D(iBooker,xvariable + "EtEffNum", "", nbinsPt_, ptmin_, ptmax_, kVital);
+  h_den_pt = iWrapper.book1D(iBooker,xvariable + "EtEffDenom", "", nbinsPt_, ptmin_, ptmax_, kVital);
 
   if (xvariable != "met") {
     h_num_eta = iWrapper.book1D(iBooker,xvariable + "EtaEffNum", "", nbinsEta_, etamin_, etamax_);

@@ -56,9 +56,9 @@ void HLTTauDQMPathPlotter::bookHistograms(IWrapper & iWrapper, DQMStore::IBooker
   if (doRefAnalysis_) {
     iBooker.setCurrentFolder(triggerTag() + "/helpers");
     if (hltPath_.hasL2Taus()) {
-      hL2TrigTauEtEffNum_ = iWrapper.book1D(iBooker, "L2TrigTauEtEffNum", "L2 #tau p_{T} efficiency;Ref #tau p_{T};entries", ptbins_, 0, ptmax_, kEverything);
+      hL2TrigTauEtEffNum_ = iWrapper.book1D(iBooker, "L2TrigTauEtEffNum", "L2 #tau p_{T} efficiency;Ref #tau p_{T};entries", ptbins_, 0, ptmax_, kVital);
       hL2TrigTauEtEffDenom_ = iWrapper.book1D(iBooker, 
-       "L2TrigTauEtEffDenom", "L2 #tau p_{T} denominator;Ref #tau p_{T};Efficiency", ptbins_, 0, ptmax_, kEverything);
+       "L2TrigTauEtEffDenom", "L2 #tau p_{T} denominator;Ref #tau p_{T};Efficiency", ptbins_, 0, ptmax_, kVital);
       hL2TrigTauEtaEffNum_ =
 	iWrapper.book1D(iBooker, "L2TrigTauEtaEffNum", "L2 #tau #eta efficiency;Ref #tau #eta;entries", etabins_, -2.5, 2.5, kEverything);
       hL2TrigTauEtaEffDenom_ = iWrapper.book1D(iBooker, 
@@ -71,20 +71,20 @@ void HLTTauDQMPathPlotter::bookHistograms(IWrapper & iWrapper, DQMStore::IBooker
                                                "L2 #tau p_{T} efficiency (high p_{T});Ref #tau p_{T};entries",
                                                ptbins_,
                                                0,
-                                               highptmax_, kEverything);
+                                               highptmax_, kVital);
       hL2TrigTauHighEtEffDenom_ = iWrapper.book1D(iBooker, "L2TrigTauHighEtEffDenom",
                                                  "L2 #tau p_{T} denominator (high p_{T});Ref #tau p_{T};Efficiency",
                                                  ptbins_,
                                                  0,
-                                                 highptmax_, kEverything);
+                                                 highptmax_, kVital);
     }
 
     if (hltPath_.hasL3Taus()) {
       hL3TrigTauEtEffNum_ =
 	iWrapper.book1D(iBooker, "L3TrigTauEtEffNum", "L3 #tau p_{T} efficiency;Ref #tau p_{T};entries", ptbins_, 0, ptmax_, kEverything);
-      hL3TrigTauEtEffDenom_ = iWrapper.book1D(iBooker, "L3TrigTauEtEffDenom", "L3 #tau p_{T} denominator;Ref #tau p_{T};Efficiency", ptbins_, 0, ptmax_, kEverything);
+      hL3TrigTauEtEffDenom_ = iWrapper.book1D(iBooker, "L3TrigTauEtEffDenom", "L3 #tau p_{T} denominator;Ref #tau p_{T};Efficiency", ptbins_, 0, ptmax_, kVital);
       hL3TrigTauEtaEffNum_ =
-	iWrapper.book1D(iBooker, "L3TrigTauEtaEffNum", "L3 #tau #eta efficiency;Ref #tau #eta;entries", etabins_, -2.5, 2.5, kEverything);
+	iWrapper.book1D(iBooker, "L3TrigTauEtaEffNum", "L3 #tau #eta efficiency;Ref #tau #eta;entries", etabins_, -2.5, 2.5, kVital);
       hL3TrigTauEtaEffDenom_ = iWrapper.book1D(iBooker, "L3TrigTauEtaEffDenom", "L3 #tau #eta denominator;Ref #tau #eta;Efficiency", etabins_, -2.5, 2.5, kEverything);
       hL3TrigTauPhiEffNum_ =
 	iWrapper.book1D(iBooker, "L3TrigTauPhiEffNum", "L3 #tau #phi efficiency;Ref #tau #phi;entries", phibins_, -3.2, 3.2, kEverything);
@@ -93,20 +93,20 @@ void HLTTauDQMPathPlotter::bookHistograms(IWrapper & iWrapper, DQMStore::IBooker
                                                "L3 #tau p_{T} efficiency (high p_{T});Ref #tau p_{T};entries",
                                                ptbins_,
                                                0,
-                                               highptmax_, kEverything);
+                                               highptmax_, kVital);
       hL3TrigTauHighEtEffDenom_ = iWrapper.book1D(iBooker, "L3TrigTauHighEtEffDenom",
                                                  "L3 #tau p_{T} denominator (high p_{T});Ref #tau p_{T};Efficiency",
                                                  ptbins_,
                                                  0,
-                                                 highptmax_, kEverything);
+                                                 highptmax_, kVital);
       hL3TrigTauEtaPhiEffNum_ = iWrapper.book2D(iBooker, "L3TrigTauEtaPhiEffNum", "L3 efficiency in eta-phi plane", etabins_, -2.5, 2.5, phibins_, -3.2, 3.2, kEverything);
       hL3TrigTauEtaPhiEffDenom_ = iWrapper.book2D(iBooker, "L3TrigTauEtaPhiEffDenom", "L3 denominator in eta-phi plane", etabins_, -2.5, 2.5, phibins_, -3.2, 3.2, kEverything);
       if(hL3TrigTauEtaPhiEffDenom_) hL3TrigTauEtaPhiEffDenom_->setOption("COL");
     }
 
     if (hltPath_.hasL2Electrons()) {
-      hL2TrigElectronEtEffNum_ = iWrapper.book1D(iBooker, "L2TrigElectronEtEffNum", "L2 electron p_{T} efficiency;Ref electron p_{T};entries", ptbins_, 0, ptmax_, kEverything);
-      hL2TrigElectronEtEffDenom_ = iWrapper.book1D(iBooker, "L2TrigElectronEtEffDenom", "L2 electron p_{T} denominator;Ref electron p_{T};Efficiency", ptbins_, 0, ptmax_, kEverything);
+      hL2TrigElectronEtEffNum_ = iWrapper.book1D(iBooker, "L2TrigElectronEtEffNum", "L2 electron p_{T} efficiency;Ref electron p_{T};entries", ptbins_, 0, ptmax_, kVital);
+      hL2TrigElectronEtEffDenom_ = iWrapper.book1D(iBooker, "L2TrigElectronEtEffDenom", "L2 electron p_{T} denominator;Ref electron p_{T};Efficiency", ptbins_, 0, ptmax_, kVital);
       hL2TrigElectronEtaEffNum_ = iWrapper.book1D(iBooker, "L2TrigElectronEtaEffNum", "L2 electron #eta efficiency;Ref electron #eta;entries", etabins_, -2.5, 2.5, kEverything);
       hL2TrigElectronEtaEffDenom_ = iWrapper.book1D(iBooker, "L2TrigElectronEtaEffDenom", "L2 electron #eta denominator;Ref electron #eta;Efficiency", etabins_, -2.5, 2.5, kEverything);
       hL2TrigElectronPhiEffNum_ = iWrapper.book1D(iBooker, "L2TrigElectronPhiEffNum", "L2 electron #phi efficiency;Ref electron #phi;entries", phibins_, -3.2, 3.2, kEverything);
@@ -115,9 +115,9 @@ void HLTTauDQMPathPlotter::bookHistograms(IWrapper & iWrapper, DQMStore::IBooker
 
     if (hltPath_.hasL3Electrons()) {
       hL3TrigElectronEtEffNum_ = iWrapper.book1D(iBooker, 
-						"L3TrigElectronEtEffNum", "L3 electron p_{T} efficiency;Ref electron p_{T};entries", ptbins_, 0, ptmax_, kEverything);
+						"L3TrigElectronEtEffNum", "L3 electron p_{T} efficiency;Ref electron p_{T};entries", ptbins_, 0, ptmax_, kVital);
       hL3TrigElectronEtEffDenom_ = iWrapper.book1D(iBooker, 
-						  "L3TrigElectronEtEffDenom", "L3 electron p_{T} denominator;Ref electron p_{T};Efficiency", ptbins_, 0, ptmax_, kEverything);
+						  "L3TrigElectronEtEffDenom", "L3 electron p_{T} denominator;Ref electron p_{T};Efficiency", ptbins_, 0, ptmax_, kVital);
       hL3TrigElectronEtaEffNum_ = iWrapper.book1D(iBooker, 
 						 "L3TrigElectronEtaEffNum", "L3 electron #eta efficiency;Ref electron #eta;entries", etabins_, -2.5, 2.5, kEverything);
       hL3TrigElectronEtaEffDenom_ = iWrapper.book1D(iBooker, 
@@ -130,10 +130,10 @@ void HLTTauDQMPathPlotter::bookHistograms(IWrapper & iWrapper, DQMStore::IBooker
 
     if (hltPath_.hasL2Muons()) {
       hL2TrigMuonEtEffNum_ =
-	iWrapper.book1D(iBooker, "L2TrigMuonEtEffNum", "L2 muon p_{T} efficiency;Ref muon p_{T};entries", ptbins_, 0, ptmax_, kEverything);
-      hL2TrigMuonEtEffDenom_ = iWrapper.book1D(iBooker, "L2TrigMuonEtEffDenom", "L2 muon p_{T} denominator;Ref muon p_{T};Efficiency", ptbins_, 0, ptmax_, kEverything);
+	iWrapper.book1D(iBooker, "L2TrigMuonEtEffNum", "L2 muon p_{T} efficiency;Ref muon p_{T};entries", ptbins_, 0, ptmax_, kVital);
+      hL2TrigMuonEtEffDenom_ = iWrapper.book1D(iBooker, "L2TrigMuonEtEffDenom", "L2 muon p_{T} denominator;Ref muon p_{T};Efficiency", ptbins_, 0, ptmax_, kVital);
       hL2TrigMuonEtaEffNum_ =
-          iWrapper.book1D(iBooker, "L2TrigMuonEtaEffNum", "L2 muon #eta efficiency;Ref muon #eta;entries", etabins_, -2.5, 2.5, kEverything);
+          iWrapper.book1D(iBooker, "L2TrigMuonEtaEffNum", "L2 muon #eta efficiency;Ref muon #eta;entries", etabins_, -2.5, 2.5, kVital);
       hL2TrigMuonEtaEffDenom_ = iWrapper.book1D(iBooker, 
           "L2TrigMuonEtaEffDenom", "L2 muon #eta denominator;Ref muon #eta;Efficiency", etabins_, -2.5, 2.5, kEverything);
       hL2TrigMuonPhiEffNum_ =
@@ -144,24 +144,24 @@ void HLTTauDQMPathPlotter::bookHistograms(IWrapper & iWrapper, DQMStore::IBooker
 
     if (hltPath_.hasL3Muons()) {
       hL3TrigMuonEtEffNum_ =
-          iWrapper.book1D(iBooker, "L3TrigMuonEtEffNum", "L3 muon p_{T} efficiency;Ref muon p_{T};entries", ptbins_, 0, ptmax_);
+	iWrapper.book1D(iBooker, "L3TrigMuonEtEffNum", "L3 muon p_{T} efficiency;Ref muon p_{T};entries", ptbins_, 0, ptmax_, kVital);
       hL3TrigMuonEtEffDenom_ = iWrapper.book1D(iBooker, 
-          "L3TrigMuonEtEffDenom", "L3 muon p_{T} denominator;Ref muon p_{T};Efficiency", ptbins_, 0, ptmax_);
+       "L3TrigMuonEtEffDenom", "L3 muon p_{T} denominator;Ref muon p_{T};Efficiency", ptbins_, 0, ptmax_, kVital);
       hL3TrigMuonEtaEffNum_ =
-          iWrapper.book1D(iBooker, "L3TrigMuonEtaEffNum", "L3 muon #eta efficiency;Ref muon #eta;entries", etabins_, -2.5, 2.5);
+	iWrapper.book1D(iBooker, "L3TrigMuonEtaEffNum", "L3 muon #eta efficiency;Ref muon #eta;entries", etabins_, -2.5, 2.5, kEverything);
       hL3TrigMuonEtaEffDenom_ = iWrapper.book1D(iBooker, 
-          "L3TrigMuonEtaEffDenom", "L3 muon #eta denominator;Ref muon #eta;Efficiency", etabins_, -2.5, 2.5);
+	"L3TrigMuonEtaEffDenom", "L3 muon #eta denominator;Ref muon #eta;Efficiency", etabins_, -2.5, 2.5, kEverything);
       hL3TrigMuonPhiEffNum_ =
-          iWrapper.book1D(iBooker, "L3TrigMuonPhiEffNum", "L3 muon #phi efficiency;Ref muon #phi;entries", phibins_, -3.2, 3.2);
+	iWrapper.book1D(iBooker, "L3TrigMuonPhiEffNum", "L3 muon #phi efficiency;Ref muon #phi;entries", phibins_, -3.2, 3.2, kEverything);
       hL3TrigMuonPhiEffDenom_ = iWrapper.book1D(iBooker, 
-          "L3TrigMuonPhiEffDenom", "L3 muon #phi denominator;Ref muon #phi;Efficiency", phibins_, -3.2, 3.2);
+	"L3TrigMuonPhiEffDenom", "L3 muon #phi denominator;Ref muon #phi;Efficiency", phibins_, -3.2, 3.2, kEverything);
     }
 
     if (hltPath_.hasL2CaloMET()) {
       hL2TrigMETEtEffNum_ =
-          iWrapper.book1D(iBooker, "L2TrigMETEtEffNum", "L2 MET efficiency;Ref MET;entries", ptbins_, 0, ptmax_);
+	iWrapper.book1D(iBooker, "L2TrigMETEtEffNum", "L2 MET efficiency;Ref MET;entries", ptbins_, 0, ptmax_, kVital);
       hL2TrigMETEtEffDenom_ =
-          iWrapper.book1D(iBooker, "L2TrigMETEtEffDenom", "L2 MET denominator;Ref MET;Efficiency", ptbins_, 0, ptmax_);
+	iWrapper.book1D(iBooker, "L2TrigMETEtEffDenom", "L2 MET denominator;Ref MET;Efficiency", ptbins_, 0, ptmax_, kVital);
     }
 
     iBooker.setCurrentFolder(triggerTag());

@@ -62,41 +62,41 @@ void HLTTauDQML1Plotter::bookHistograms(IWrapper &iWrapper, DQMStore::IBooker &i
   //Create the histograms
   iBooker.setCurrentFolder(triggerTag());
 
-  l1tauEt_ = iWrapper.book1D(iBooker, "L1TauEt", "L1 #tau E_{T};L1 #tau E_{T};entries", binsEt_, 0, maxPt_);
+  l1tauEt_ = iWrapper.book1D(iBooker, "L1TauEt", "L1 #tau E_{T};L1 #tau E_{T};entries", binsEt_, 0, maxPt_, kVital);
   l1tauEta_ = iWrapper.book1D(iBooker, "L1TauEta", "L1 #tau #eta;L1 #tau #eta;entries", binsEta_, -maxEta_, maxEta_);
   l1tauPhi_ = iWrapper.book1D(iBooker, "L1TauPhi", "L1 #tau #phi;L1 #tau #phi;entries", binsPhi_, minPhi, maxPhi);
 
-  l1isotauEt_ = iWrapper.book1D(iBooker, "L1IsoTauEt", "L1 isolated #tau E_{T};L1 #tau E_{T};entries", binsEt_, 0, maxPt_);
+  l1isotauEt_ = iWrapper.book1D(iBooker, "L1IsoTauEt", "L1 isolated #tau E_{T};L1 #tau E_{T};entries", binsEt_, 0, maxPt_, kVital);
   l1isotauEta_ =
       iWrapper.book1D(iBooker, "L1IsoTauEta", "L1 isolated #tau #eta;L1 #tau #eta;entries", binsEta_, -maxEta_, maxEta_);
   l1isotauPhi_ = iWrapper.book1D(iBooker, "L1IsoTauPhi", "L1 isolated #tau #phi;L1 #tau #phi;entries", binsPhi_, minPhi, maxPhi);
 
-  l1etmEt_ = iWrapper.book1D(iBooker, "L1ETM", "L1 ETM E_{T};L1 ETM E_{T};entries", binsEt_, 0, maxPt_);
+  l1etmEt_ = iWrapper.book1D(iBooker, "L1ETM", "L1 ETM E_{T};L1 ETM E_{T};entries", binsEt_, 0, maxPt_, kVital);
   l1etmPhi_ = iWrapper.book1D(iBooker, "L1ETMPhi", "L1 ETM #phi;L1 ETM #phi;entries", binsPhi_, minPhi, maxPhi);
 
   snprintf(buffer, BUFMAX, "L1 leading #tau E_{T};L1 #tau E_{T};entries");
-  firstTauEt_ = iWrapper.book1D(iBooker, "L1LeadTauEt", buffer, binsEt_, 0, maxPt_);
+  firstTauEt_ = iWrapper.book1D(iBooker, "L1LeadTauEt", buffer, binsEt_, 0, maxPt_, kVital);
   snprintf(buffer, BUFMAX, "L1 leading #tau #eta;L1 #tau #eta;entries");
   firstTauEta_ = iWrapper.book1D(iBooker, "L1LeadTauEta", buffer, binsEta_, -maxEta_, maxEta_);
   snprintf(buffer, BUFMAX, "L1 leading #tau #phi;L1 #tau #phi;entries");
   firstTauPhi_ = iWrapper.book1D(iBooker, "L1LeadTauPhi", buffer, binsPhi_, minPhi, maxPhi);
 
   snprintf(buffer, BUFMAX, "L1 second-leading #tau E_{T};L1 #tau E_{T};entries");
-  secondTauEt_ = iWrapper.book1D(iBooker, "L1SecondTauEt", buffer, binsEt_, 0, maxPt_);
+  secondTauEt_ = iWrapper.book1D(iBooker, "L1SecondTauEt", buffer, binsEt_, 0, maxPt_, kVital);
   snprintf(buffer, BUFMAX, "L1 second-leading #tau #eta;L1 #tau #eta;entries");
   secondTauEta_ = iWrapper.book1D(iBooker, "L1SecondTauEta", buffer, binsEta_, -maxEta_, maxEta_);
   snprintf(buffer, BUFMAX, "L1 second-leading #tau #phi;L1 #tau #phi;entries");
   secondTauPhi_ = iWrapper.book1D(iBooker, "L1SecondTauPhi", buffer, binsPhi_, minPhi, maxPhi);
 
   snprintf(buffer, BUFMAX, "L1 leading isolated #tau E_{T};L1 #tau E_{T};entries");
-  firstIsoTauEt_ = iWrapper.book1D(iBooker, "L1LeadIsoTauEt", buffer, binsEt_, 0, maxPt_);
+  firstIsoTauEt_ = iWrapper.book1D(iBooker, "L1LeadIsoTauEt", buffer, binsEt_, 0, maxPt_, kVital);
   snprintf(buffer, BUFMAX, "L1 leading isolated #tau #eta;L1 #tau #eta;entries");
   firstIsoTauEta_ = iWrapper.book1D(iBooker, "L1LeadIsoTauEta", buffer, binsEta_, -maxEta_, maxEta_);
   snprintf(buffer, BUFMAX, "L1 leading isolated #tau #phi;L1 #tau #phi;entries");
   firstIsoTauPhi_ = iWrapper.book1D(iBooker, "L1LeadIsoTauPhi", buffer, binsPhi_, minPhi, maxPhi);
 
   snprintf(buffer, BUFMAX, "L1 second-leading isolated #tau E_{T};L1 #tau E_{T};entries");
-  secondIsoTauEt_ = iWrapper.book1D(iBooker, "L1SecondIsoTauEt", buffer, binsEt_, 0, maxPt_);
+  secondIsoTauEt_ = iWrapper.book1D(iBooker, "L1SecondIsoTauEt", buffer, binsEt_, 0, maxPt_, kVital);
   snprintf(buffer, BUFMAX, "L1 second-leading isolated #tau #eta;L1 #tau #eta;entries");
   secondIsoTauEta_ = iWrapper.book1D(iBooker, "L1SecondIsoTauEta", buffer, binsEta_, -maxEta_, maxEta_);
   snprintf(buffer, BUFMAX, "L1 second-leading isolated #tau #phi;L1 #tau #phi;entries");
@@ -104,28 +104,24 @@ void HLTTauDQML1Plotter::bookHistograms(IWrapper &iWrapper, DQMStore::IBooker &i
 
   if (doRefAnalysis_) {
     l1tauEtRes_ = iWrapper.book1D(iBooker, 
-        "L1TauEtResol", "L1 #tau E_{T} resolution;[L1 #tau E_{T}-Ref #tau E_{T}]/Ref #tau E_{T};entries", 60, -1, 4);
+				  "L1TauEtResol", "L1 #tau E_{T} resolution;[L1 #tau E_{T}-Ref #tau E_{T}]/Ref #tau E_{T};entries", 60, -1, 4, kVital);
     l1isotauEtRes_ =
         iWrapper.book1D(iBooker, "L1IsoTauEtResol",
                        "L1 isolated #tau E_{T} resolution;[L1 #tau E_{T}-Ref #tau E_{T}]/Ref #tau E_{T};entries",
-                       60,
-                       -1,
-                       4);
+			60, -1, 4, kVital);
 
     iBooker.setCurrentFolder(triggerTag() + "/helpers");
 
     l1tauEtEffNum_ =
-        iWrapper.book1D(iBooker, "L1TauEtEffNum", "L1 #tau E_{T} Efficiency;Ref #tau E_{T};entries", binsEt_, 0, maxPt_);
+      iWrapper.book1D(iBooker, "L1TauEtEffNum", "L1 #tau E_{T} Efficiency;Ref #tau E_{T};entries", binsEt_, 0, maxPt_, kVital);
     l1tauHighEtEffNum_ = iWrapper.book1D(iBooker, 
-        "L1TauHighEtEffNum", "L1 #tau E_{T} Efficiency (high E_{T});Ref #tau E_{T};entries", binsEt_, 0, maxHighPt_);
+      "L1TauHighEtEffNum", "L1 #tau E_{T} Efficiency (high E_{T});Ref #tau E_{T};entries", binsEt_, 0, maxHighPt_, kVital);
 
     l1tauEtEffDenom_ =
         iWrapper.book1D(iBooker, "L1TauEtEffDenom", "L1 #tau E_{T} Denominator;Ref #tau E_{T};entries", binsEt_, 0, maxPt_);
     l1tauHighEtEffDenom_ = iWrapper.book1D(iBooker, "L1TauHighEtEffDenom",
                                           "L1 #tau E_{T} Denominator (high E_{T});Ref #tau E_{T};Efficiency",
-                                          binsEt_,
-                                          0,
-                                          maxHighPt_);
+					   binsEt_, 0, maxHighPt_, kVital);
 
     l1tauEtaEffNum_ =
         iWrapper.book1D(iBooker, "L1TauEtaEffNum", "L1 #tau #eta Efficiency;Ref #tau #eta;entries", binsEta_, -maxEta_, maxEta_);
@@ -138,9 +134,9 @@ void HLTTauDQML1Plotter::bookHistograms(IWrapper &iWrapper, DQMStore::IBooker &i
         "L1TauPhiEffDenom", "L1 #tau #phi Denominator;Ref #tau #phi;Efficiency", binsPhi_, minPhi, maxPhi);
 
     l1isotauEtEffNum_ = iWrapper.book1D(iBooker, 
-        "L1IsoTauEtEffNum", "L1 isolated #tau E_{T} Efficiency;Ref #tau E_{T};entries", binsEt_, 0, maxPt_);
+	"L1IsoTauEtEffNum", "L1 isolated #tau E_{T} Efficiency;Ref #tau E_{T};entries", binsEt_, 0, maxPt_, kVital);
     l1isotauEtEffDenom_ = iWrapper.book1D(iBooker, 
-        "L1IsoTauEtEffDenom", "L1 isolated #tau E_{T} Denominator;Ref #tau E_{T};entries", binsEt_, 0, maxPt_);
+        "L1IsoTauEtEffDenom", "L1 isolated #tau E_{T} Denominator;Ref #tau E_{T};entries", binsEt_, 0, maxPt_, kVital);
 
     l1isotauEtaEffNum_ = iWrapper.book1D(iBooker, 
         "L1IsoTauEtaEffNum", "L1 isolated #tau #eta Efficiency;Ref #tau #eta;entries", binsEta_, -maxEta_, maxEta_);
