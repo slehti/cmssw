@@ -117,7 +117,7 @@ void HLTTauDQMPathPlotter::bookHistograms(HistoWrapper& iWrapper, DQMStore::IBoo
                                             ptbins_,
                                             0,
                                             ptmax_,
-                                            kEverything);
+                                            kVital);
       hL3TrigTauEtEffDenom_ = iWrapper.book1D(iBooker,
                                               "L3TrigTauEtEffDenom",
                                               "L3 #tau p_{T} denominator;Ref #tau p_{T};Efficiency",
